@@ -1,0 +1,6 @@
+com\jnshu\service\ServiceInterface.class
+com\jnshu\service\ServiceImpl.class
+com\jnshu\dao\pojo\Student.class
+com\jnshu\util\Page.class
+com\jnshu\controller\CrudController.class
+com\jnshu\dao\mapper\JdbcInterface.class

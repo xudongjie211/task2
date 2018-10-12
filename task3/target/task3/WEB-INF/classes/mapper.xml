@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.dao.JdbcInterface">
+
+	<insert id="addSort" parameterType="com.jnshu.entity.Sort">
+		insert into sort(name,desc) values
+		(#{name},#{desc})
+		<selectKey keyProperty="sid" order="AFTER" resultType="int">
+			select
+			last_insert_id()
+		</selectKey>
+	</insert>
+
+
+	<delete id="deleteSort" parameterType="int">
+		delete from sort where
+		sid=#{sid}
+	</delete>
+
+	<update id="updateSort" parameterType="com.jnshu.entity.Sort">
+		update sort set
+		name=#{name},desc=#{desc} where sid=#{sid}
+	</update>
+
+	<select id="selectSort" parameterType="int"
+		resultType="com.jnshu.entity.Sort">
+		select *
+		from sort where sid=#{sid}
+	</select>
+
+	<select id="selects" resultType="com.jnshu.entity.Sort">
+		select * from sort
+	</select>
+	
+	
+	<insert id="addWorks" parameterType="com.jnshu.entity.Works">
+		insert into works (name,`desc`,picture,sid) values
+		(#{name},#{desc},#{picture},#{sid})
+		<selectKey keyProperty="wid" order="AFTER" resultType="int">
+			select
+			last_insert_id()
+		</selectKey>
+	</insert>
+
+
+	<delete id="deleteWorks" parameterType="int">
+		delete from works where
+		wid=#{wid}
+	</delete>
+
+	<update id="updateWorks" parameterType="com.jnshu.entity.Works">
+		update works set
+		name=#{name},`desc`=#{desc},picture=#{picture},sid=#{sid} where wid=#{wid}
+	</update>
+
+	<select id="selectWorks" parameterType="int"
+		resultType="com.jnshu.entity.Works">
+		select *
+		from works where wid=#{wid}
+	</select>
+
+	<select id="selectw" resultType="com.jnshu.entity.Works">
+		select * from works
+	</select>
+	
+	
+	
+
+	
+	<select id="selectList"  parameterType="int"    resultType="com.jnshu.entity.Works">
+		select * from works where sid=#{sid};
+	</select>
+	
+	
+	
+	
+
+	<!-- <select id="selectLike" parameterType="String"
+		resultType="com.jnshu.dao.pojo.Student">
+		select * from form1 where name like "%"#{name}"%"
+	</select> -->
+
+<!-- 
+	<select id="count" resultType="int">
+		select count(*) from form1
+	</select>
+
+
+
+	<delete id="deleteAll">
+		delete from form1
+	</delete>
+	<delete id="back1">
+		TRUNCATE TABLE form1
+	</delete> -->
+<select id="countworks" parameterType="int" resultType="int">
+		select count(*) from works where sid=#{sid}
+	</select>
+
+
+
+
+
+	<select id="selectpage" resultType="com.jnshu.entity.Works" >
+	select * from works where sid=#{sid} 
+	<if test="page.start>=0 and page.start!=null and page.step!=null">
+		limit #{page.start} ,#{page.step}
+	</if>
+	</select>
+
+</mapper>

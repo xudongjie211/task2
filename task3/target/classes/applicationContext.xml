@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 开启注释 -->
+	<context:annotation-config />
+
+	<!-- 扫描所在包的@service等注释 -->
+	<context:component-scan base-package="com" />
+	<!-- 传递连接池的信息 -->
+	<context:property-placeholder location="classpath:/jdbc.propreties" />
+
+	<bean id="datasource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+
+
+
+
+
+
+
+	<!-- 配置sqlswssion工厂，链接数据源和mapper配置信息 -->
+	<bean id="sqlsession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="datasource"></property>
+		<property name="mapperLocations" value="classpath:mapper.xml"></property>
+	</bean>
+	
+<!-- 用mapper工厂，适合一个mapper接口 
+	<bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.jnshu.dao.mapper.JdbcInterface" />
+		<property name="sqlSessionFactory" ref="sqlsession" />
+	</bean>
+ -->
+
+	<!-- 通过扫描mapper接口所在包，适合多个接口类 -->
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+		<property name="sqlSessionFactoryBeanName" value="sqlsession"/>
+		 <property name="basePackage" value="com.jnshu.dao"/> 
+		 </bean> 
+
+
+
+</beans>

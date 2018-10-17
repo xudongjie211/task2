@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.dao.CourseInterface">
+<insert id="add" parameterType="com.jnshu.pojo.Course">
+			insert into form2 (coursename,intro,salary,studynum,create_at) values(#{coursename},#{intro},#{salary},#{studynum},#{create_at})
+			<selectKey keyProperty="id" order="AFTER" resultType="long">
+			select
+			last_insert_id()
+		</selectKey>
+</insert>
+<select id="select" parameterType="int" resultType="com.jnshu.pojo.Course">
+	select * from form2 where id=#{id}
+</select>
+	
+	<select id="selectAll" resultType="com.jnshu.pojo.Course" >
+		select * from form2
+	</select>
+
+</mapper>

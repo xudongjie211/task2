@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	   "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- 主布局 -->
+	<definition name="layout" template="/jsp/mainLayout.jsp">
+		<put-attribute name="header" value="/jsp/header.jsp" />
+		<!-- <put-attribute name="menu" value="/jsp/menu.jsp" /> -->
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/jsp/footer.jsp" />
+	
+	</definition>
+	<!-- 主布局 -->
+	<!-- 项目 -->
+	  <definition name="myView1" extends="layout">
+		<put-attribute name="body" value="/jsp/body1.jsp" />	
+	</definition>
+	
+	 <definition name="myView2" extends="layout">
+		<put-attribute name="body" value="/jsp/body2.jsp" />	
+	</definition>
+	
+		 <definition name="myView3" extends="layout">
+		<put-attribute name="body" value="/jsp/body3.jsp" />	<!-- 首页 -->
+	</definition>
+	
+	
+	
+	
+	
+	<!--项目-->
+</tiles-definitions>
